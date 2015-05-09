@@ -14,7 +14,10 @@ var resetButton = document.getElementById("revert");
 $(document).ready(function() {
   // Event listener for the play/pause button
   playButton.addEventListener("click", function() {
-     video.play();
+     
+     setTimeout(function() {
+      video.play(); 
+     }, 3000);
   });
 
   resetButton.addEventListener("click", function() {
