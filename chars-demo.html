@@ -37,18 +37,20 @@
     </nav>
   <div class="container-demo">
     <div class="video">
-      <video width="640" height="480" controls>
+      <video id="video" width="640" height="480">
         <source src="videos/learnioke_fresh_prince.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+        Your browser does not support the video tag.
       </video>
+     <!-- Video Controls -->
+      <div id="video-controls">
+        <button type="button" id="play-pause" class="charsWordsLines btn-play btn-controls">Play</button>
+        <button type="button" id="revert" class="btn-reset btn-controls">Reset</button>
+      </div>
     </div>
-    <div class="lyrics-controls">
-      <!-- <button id="chars">chars</button> -->
-      <!-- <button id="words">words</button> -->
-      <!-- <button id="lines">lines</button> -->
+<!--     <div class="lyrics-controls">
       <button id="revert" class="btn-reset btn-controls">Reset</button>
       <button id="charsWordsLines" class="btn-play btn-controls">Play</button>
-    </div> 
+    </div>  -->
     <div class="lyrics">
       <div id="demo">
         <div id="quote">
@@ -117,7 +119,7 @@ $(document).ready(function() {
    
   })
 
-  $("#charsWordsLines").click(function() {
+  $(".charsWordsLines").click(function() {
     kill();
     mySplitText.split({type:"chars, words, lines"}) 
     splitTextTimeline.staggerFrom(mySplitText.chars, 0.2, {autoAlpha:0, scale:4, force3D:true}, 0.01, 0.5)
@@ -134,9 +136,10 @@ $(document).ready(function() {
 });
 </script>
 
-<script src="js/vendor/greensock/TimelineLite.min.js"></script>
-<script src="js/vendor/greensock/TweenLite.min.js"></script>
-<script src="js/vendor/greensock/TweenMax.min.js"></script>
-  
-</body>
+  <script src="js/vendor/greensock/TimelineLite.min.js"></script>
+  <script src="js/vendor/greensock/TweenLite.min.js"></script>
+  <script src="js/vendor/greensock/TweenMax.min.js"></script>
+  <script src="js/main.js"></script>
+    
+  </body>
 </html>
