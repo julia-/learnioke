@@ -3,7 +3,9 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-
+body {
+  height: 100%;
+}
 .navbar-inverse {
   background-color: #0097A7;
   border: none;
@@ -13,7 +15,6 @@
   font-family: 'Englebert', sans-serif;
   padding: 0.5em;
   font-size: 4em;
-/*  text-transform: uppercase;*/
   color: #fff;
 }
 
@@ -34,6 +35,7 @@
 .heading {
   font-family: 'Englebert', sans-serif;
 }
+
 .btn-success {
   color: #fff;
   background-color: #00BCD4;
@@ -50,19 +52,8 @@
   font-weight: 700;
 }
 
-.btn-primary {
-  color: #212121;
-  background-color: #fff;
-  border-color: #fff;
-}
-
-.btn-primary:hover {
-  color: #fff;
-  background-color: #0097A7;
-  border-color: #0097A7;
-}
-
 .container-demo {
+  height: 100%;
   background-color: #000;
   padding: 2.5em 0;
   color: #fff;
@@ -81,7 +72,6 @@
   padding: 4em 2.5em;
   font-family: Asap, Arial, Helvetica, sans-serif;
   color: white;
-  width: 70%;
   margin: 3em auto;
   overflow:hidden;
 }
@@ -89,7 +79,7 @@
   padding: 0 2.5em;
   font-family: Asap, Arial, Helvetica, sans-serif;
   color: white;
-  width: 70%;
+  width: 80%;
   margin: 3em auto;
   overflow:hidden;
 }
@@ -127,4 +117,8 @@
 .video {
   margin: auto;
   text-align: center;
+}
+
+.footer-details {
+  padding-top: 1em;
 }
