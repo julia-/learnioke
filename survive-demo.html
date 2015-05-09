@@ -36,6 +36,12 @@
   </nav>
     <div class="container-demo">
       <h1>I will survive...financial services regulations</h1>
+      <img src="img/gloria.jpeg">
+      <audio id="video">
+        <source src="videos/learnioke_survive.mp3" type="audio/mpeg">
+        <!-- <source src="videos/learnioke_fresh_prince.m4a" type="audio/mpeg"> -->
+
+      </audio>
 
       <div class="lyrics">
         <div id="nav">
@@ -107,7 +113,7 @@ $(document).ready(function() {
    
   })
 
-  $("#charsWordsLines").click(function() {
+  $(".charsWordsLines").click(function() {
     kill();
     mySplitText.split({type:"chars, words, lines"}) 
     splitTextTimeline.staggerFrom(mySplitText.chars, 0.2, {autoAlpha:0, scale:4, force3D:true}, 0.01, 0.5)
