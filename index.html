@@ -1,0 +1,155 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Learnioke</title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href='http://fonts.googleapis.com/css?family=Englebert' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <style>
+          body {
+              padding-top: 50px;
+              padding-bottom: 20px;
+          }
+      </style>
+<!--         <link rel="stylesheet" href="css/bootstrap-theme.min.css"> -->
+      <link rel="stylesheet" href="css/main.css">
+      <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+      <script src="js/vendor/jquery-1.11.2.min.js"></script>
+      <!-- SplitText -->
+      <script src="js/vendor/greensock/utils/SplitText.min.js"></script>
+  </head>
+    <body>
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Learnioke</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right" role="form">
+              <div class="form-group">
+                <input type="text" placeholder="Email" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="password" placeholder="Password" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-success">Sign in</button>
+            </form>
+          </div><!--/.navbar-collapse -->
+        </div>
+      </nav>
+    <div class="container-demo">
+      
+      <div class="demo">
+        <div id="demo">
+          <div id="quote">A B C<br>It's easy as, 1 2 3<br>As simple as, do re mi<br>A B C, learning with karaoke!!!</div> 
+        </div>
+        <div class="nav-controls">
+          <!-- <button id="chars">chars</button> -->
+          <!-- <button id="words">words</button> -->
+          <!-- <button id="lines">lines</button> -->
+          <button id="revert" class="btn-reset btn-controls">Reset</button>
+          <button id="charsWordsLines" class="btn-play btn-controls">Play</button>
+          
+        </div> 
+      </div>
+    </div>
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Fresh Prince of Paris</h2>
+          <p>Be your own Jazzy Jeff!!! Learn simple and useful French phrases with the help of the Fresh Prince of Bel Air. </p>
+          <p><a class="btn btn-default" href="fresh-demo.html" role="button">Learn French &raquo;</a></p>
+        </div>
+        <div class="col-md-6">
+          <h2>I will survive...financial regulation</h2>
+          <p>Acronyms, acronyms, acronyms. Are you sick of trying to learn acronyms to impress people at work? Get your Diva on while learning the latest financial regulation lingo.</p>
+          <p><a class="btn btn-default" href="survive-demo.html" role="button">Learn Financial Regulations &raquo;</a></p>
+       </div>
+      </div>
+
+
+      <hr>
+
+      <footer>
+        <p>&copy; Learnioke 2015</p>
+      </footer>
+    </div> <!-- /container -->        
+    <script src="js/vendor/jquery-1.11.2.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+
+        <script>
+        $(document).ready(function() {
+
+          var $quote = $("#quote"),
+              mySplitText = new SplitText($quote, {type:"words"}),
+              splitTextTimeline = new TimelineLite();
+
+          TweenLite.set($quote, {perspective:400});
+
+          //kill any animations and set text back to its pre-split state
+          function kill(){
+            splitTextTimeline.clear().time(0);
+            mySplitText.revert();
+          }
+
+          $("#chars").click(function() {
+            kill();
+            mySplitText.split({type:"chars, words"}) 
+            splitTextTimeline.staggerFrom(mySplitText.chars, 0.6, {scale:4, autoAlpha:0,  rotationX:-180,  transformOrigin:"100% 50%", ease:Back.easeOut}, 0.02);
+          })
+
+          $("#words").click(function() {
+            kill();
+            mySplitText.split({type:"words"}) 
+            $(mySplitText.words).each(function(index,el){
+              splitTextTimeline.from($(el), 0.6, {opacity:0, force3D:true}, index * 0.01);
+              splitTextTimeline.from($(el), 0.6, {scale:index % 2 == 0  ? 0 : 2, ease:Back.easeOut}, index * 0.01); 
+            });
+          })
+
+          $("#lines").click(function() {
+             kill();
+             mySplitText.split({type:"lines"}) 
+             splitTextTimeline.staggerFrom(mySplitText.lines, 0.5, {opacity:0, rotationX:-120, force3D:true, transformOrigin:"top center -150"}, 0.1);
+           
+          })
+
+          $("#charsWordsLines").click(function() {
+            kill();
+            mySplitText.split({type:"chars, words, lines"}) 
+            splitTextTimeline.staggerFrom(mySplitText.chars, 0.2, {autoAlpha:0, scale:4, force3D:true}, 0.01, 0.5)
+              .staggerTo(mySplitText.words, 0.1, {color:"#8FE402", scale:0.9}, 0.4, "words") // sets green highlight speed
+              .staggerTo(mySplitText.words, 0.2, {color:"white", scale:1}, 0.1, "words+=0.1")
+              .staggerTo(mySplitText.lines, 0.5, {x:100, autoAlpha:0}, 0.2) 
+          })
+
+          //revert the text back to its pre-split state
+          $("#revert").click(function() {
+            mySplitText.revert(); 
+          })
+
+        });
+        </script>
+
+        <script src="js/vendor/greensock/TimelineLite.min.js"></script>
+        <script src="js/vendor/greensock/TweenLite.min.js"></script>
+        <script src="js/vendor/greensock/TweenMax.min.js"></script>
+    </body>
+</html>
+
+
+
+
+
+
+
