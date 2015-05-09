@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Learnioke</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='http://fonts.googleapis.com/css?family=Englebert' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+      body {
+          padding-top: 50px;
+          padding-bottom: 20px;
+      }
+  </style>
+<!--         <link rel="stylesheet" href="css/bootstrap-theme.min.css"> -->
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+  <script src="js/vendor/jquery-1.11.2.min.js"></script>
+  <!-- SplitText -->
+  <script src="js/vendor/greensock/utils/SplitText.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Learnioke</a>
+        </div>
+      </div>
+    </nav>
+  <div class="container-demo">
+    <div class="video">
+      <video id="video" width="640" height="480">
+        <source src="videos/learnioke_fresh_prince.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+     <!-- Video Controls -->
+      <div id="video-controls">
+        <button type="button" id="play-pause" class="charsWordsLines btn-play btn-controls">Play</button>
+        <button type="button" id="revert" class="btn-reset btn-controls">Reset</button>
+      </div>
+    </div>
+<!--     <div class="lyrics-controls">
+      <button id="revert" class="btn-reset btn-controls">Reset</button>
+      <button id="charsWordsLines" class="btn-play btn-controls">Play</button>
+    </div>  -->
+    <div class="lyrics">
+      <div id="demo">
+        <div id="quote">
+          So my friends and I, we're off to France.<br>
+          <!-- Hello, welcome, how are you? -->
+          Bonjour, bienvenue, comment allez-vous?<br>
+          <br>
+          I'd like to be fluent,<br>
+          But I havn't got time.<br>
+          <!-- Good night, excuse me, see you later. -->
+          Bonne Nuit, excusez moi, a plus tard.<br>
+
+          <br>
+          I want to be able to shoot the breeze in French..<br>
+          <!-- My name is, what is your name? -->
+          je m'appeile, comment t-appelles tu?<br>
+          Music and learning they go hand in hand.<br>
+          <!-- Do you speak English? See you later. -->
+          Parlez-vous Anglais? A plus tard.<br>
+          It doesn't have to be like majorly hard.<br>
+          <!-- Hi, I'm good. I don't know.  -->
+          Salut, je vais bien. Je ne sais pas!<br>
+          So my flights are booked and I'm finally off.<br>
+          <!-- Hi, Hello, and Goodbye -->
+          Salut, Bonjour, et Au revoir!<br>
+        </div> 
+      </div>
+    </div>
+  </div>
+
+
+<script>
+$(document).ready(function() {
+
+  var $quote = $("#quote"),
+      mySplitText = new SplitText($quote, {type:"words"}),
+      splitTextTimeline = new TimelineLite();
+
+  TweenLite.set($quote, {perspective:400});
+
+  //kill any animations and set text back to its pre-split state
+  function kill(){
+    splitTextTimeline.clear().time(0);
+    mySplitText.revert();
+  }
+
+  $("#chars").click(function() {
+    kill();
+    mySplitText.split({type:"chars, words"}) 
+    splitTextTimeline.staggerFrom(mySplitText.chars, 0.6, {scale:4, autoAlpha:0,  rotationX:-180,  transformOrigin:"100% 50%", ease:Back.easeOut}, 0.02);
+  })
+
+  $("#words").click(function() {
+    kill();
+    mySplitText.split({type:"words"}) 
+    $(mySplitText.words).each(function(index,el){
+      splitTextTimeline.from($(el), 0.6, {opacity:0, force3D:true}, index * 0.01);
+      splitTextTimeline.from($(el), 0.6, {scale:index % 2 == 0  ? 0 : 2, ease:Back.easeOut}, index * 0.01); 
+    });
+  })
+
+  $("#lines").click(function() {
+     kill();
+     mySplitText.split({type:"lines"}) 
+     splitTextTimeline.staggerFrom(mySplitText.lines, 0.5, {opacity:0, rotationX:-120, force3D:true, transformOrigin:"top center -150"}, 0.1);
+   
+  })
+
+  $(".charsWordsLines").click(function() {
+    kill();
+    mySplitText.split({type:"chars, words, lines"}) 
+    splitTextTimeline.staggerFrom(mySplitText.chars, 0.2, {autoAlpha:0, scale:4, force3D:true}, 0.01, 0.5)
+      .staggerTo(mySplitText.words, 0.1, {color:"#8FE402", scale:0.9}, 0.2, "words") // sets green highlight speed
+      .staggerTo(mySplitText.words, 0.2, {color:"white", scale:1}, 0.1, "words+=0.1")
+      .staggerTo(mySplitText.lines, 0.5, {x:100, autoAlpha:0}, 0.2) 
+  })
+
+  //revert the text back to its pre-split state
+  $("#revert").click(function() {
+    mySplitText.revert(); 
+  })
+
+});
+</script>
+
+  <script src="js/vendor/greensock/TimelineLite.min.js"></script>
+  <script src="js/vendor/greensock/TweenLite.min.js"></script>
+  <script src="js/vendor/greensock/TweenMax.min.js"></script>
+  <script src="js/main.js"></script>
+    
+  </body>
+</html>

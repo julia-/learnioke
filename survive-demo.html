@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I will Survive...Financial Services Regulation</title>
+
+  <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+  <script src="js/vendor/jquery-1.11.2.min.js"></script>
+  <!-- SplitText -->
+  <script src="js/vendor/greensock/utils/SplitText.min.js"></script>
+
+
+</head>
+<body>
+
+<style>
+  body{
+    font-family: Asap, Arial, Helvetica, sans-serif;
+    color:white;
+    background:black url(http://s.cdpn.io/16327/texture_bg.jpg) no-repeat 50% 0px;
+    margin:5% 15% 0 15%;
+    overflow:hidden;
+  }
+  #demo{
+    position:relative;
+  }
+  #quote{
+    font-size:40px;
+    line-height:50px;
+    color:#dedede;
+  }
+
+  button{
+    padding:10px;
+    cursor:pointer;
+  }
+
+  #nav {
+    padding-bottom:20px;
+  }
+</style>
+
+<h1>I WILL SURVIVE...FINANCIAL SERVICES REGULATION</h1>
+<hr>
+
+<div id="nav">
+  <!-- <button id="chars">chars</button> -->
+  <!-- <button id="words">words</button> -->
+  <!-- <button id="lines">lines</button> -->
+  <button id="revert">Reset</button>
+  <button id="charsWordsLines">Play</button>
+  
+</div>  
+  
+<div id="demo">
+  <!-- <div id="quote">This is a story all about how, I used Learnioke to make the French go WOW!!!</div> 
+  </div> -->
+
+<div id="quote">
+  At first I was afraid, I was petrified<br>
+  Kept thinking I can't remember this regulation if I tried<br>
+  Things like FATCA and DODD FRANK<br>
+  AIFMD and more<br>
+  So many boring regulations in acronym to confuse you more<br>
+  <br>
+  So now I'm back, FATCA and DODD<br>
+  You're rules for investors and Fund managers across the world<br>
+  ANNEX IV is a new report<br>
+  That you gotta fill out by yourself<br>
+  Within ten little business days<br>
+  It's gonna stress you out<br>
+  <br>
+  AIFMD, the hardest one of all<br>
+  ALTERNATIVE INVESTMENT FUND MANAGER DIRECTIVE<br>
+  Now you're embedded in my head<br>
+  You've got no place to go<br>
+  You'll forever live in my brain<br>
+  In a Gloria Gaynor song<br>
+  </div> 
+</div>
+
+<script>
+$(document).ready(function() {
+
+  var $quote = $("#quote"),
+      mySplitText = new SplitText($quote, {type:"words"}),
+      splitTextTimeline = new TimelineLite();
+
+  TweenLite.set($quote, {perspective:400});
+
+  //kill any animations and set text back to its pre-split state
+  function kill(){
+    splitTextTimeline.clear().time(0);
+    mySplitText.revert();
+  }
+
+  $("#chars").click(function() {
+    kill();
+    mySplitText.split({type:"chars, words"}) 
+    splitTextTimeline.staggerFrom(mySplitText.chars, 0.6, {scale:4, autoAlpha:0,  rotationX:-180,  transformOrigin:"100% 50%", ease:Back.easeOut}, 0.02);
+  })
+
+  $("#words").click(function() {
+    kill();
+    mySplitText.split({type:"words"}) 
+    $(mySplitText.words).each(function(index,el){
+      splitTextTimeline.from($(el), 0.6, {opacity:0, force3D:true}, index * 0.01);
+      splitTextTimeline.from($(el), 0.6, {scale:index % 2 == 0  ? 0 : 2, ease:Back.easeOut}, index * 0.01); 
+    });
+  })
+
+  $("#lines").click(function() {
+     kill();
+     mySplitText.split({type:"lines"}) 
+     splitTextTimeline.staggerFrom(mySplitText.lines, 0.5, {opacity:0, rotationX:-120, force3D:true, transformOrigin:"top center -150"}, 0.1);
+   
+  })
+
+  $("#charsWordsLines").click(function() {
+    kill();
+    mySplitText.split({type:"chars, words, lines"}) 
+    splitTextTimeline.staggerFrom(mySplitText.chars, 0.2, {autoAlpha:0, scale:4, force3D:true}, 0.01, 0.5)
+      .staggerTo(mySplitText.words, 0.1, {color:"#8FE402", scale:0.9}, 0.4, "words") // sets green highlight speed
+      .staggerTo(mySplitText.words, 0.2, {color:"white", scale:1}, 0.1, "words+=0.1")
+      .staggerTo(mySplitText.lines, 0.5, {x:100, autoAlpha:0}, 0.2) 
+  })
+
+  //revert the text back to its pre-split state
+  $("#revert").click(function() {
+    mySplitText.revert(); 
+  })
+
+});
+</script>
+
+<script src="js/vendor/greensock/TimelineLite.min.js"></script>
+<script src="js/vendor/greensock/TweenLite.min.js"></script>
+<script src="js/vendor/greensock/TweenMax.min.js"></script>
+  
+</body>
+</html>
