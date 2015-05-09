@@ -4,18 +4,61 @@
    Author's custom styles
    ========================================================================== */
 
+.navbar-inverse {
+  background-color: #0097A7;
+  border: none;
+}
+.navbar-brand {
+  font-family: 'Englebert', sans-serif;
+  padding: 0.5em;
+  font-size: 3em;
+/*  text-transform: uppercase;*/
+  color: #fff;
+}
 
+.navbar-inverse .navbar-brand {
+  color: #fff;
+}
 
+.navbar-inverse .navbar-toggle {
+  border: none;
+}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+  border: none;
+}
+.jumbotron {
+  background-color: #00BCD4;
+}
+.heading {
+  font-family: 'Englebert', sans-serif;
+}
+.btn-success {
+  color: #fff;
+  background-color: #00BCD4;
+  border-color: #00BCD4;
+  text-transform: uppercase;
+  font-weight: 700;
+}
 
+.btn-success:hover {
+  color: #7B1FA2;
+  background-color: #9C27B0;
+  border-color: #9C27B0;
+  text-transform: uppercase;
+  font-weight: 700;
+}
 
+.btn-primary {
+  color: #212121;
+  background-color: #fff;
+  border-color: #fff;
+}
 
-
-
-
-
-
-
-
+.btn-primary:hover {
+  color: #fff;
+  background-color: #0097A7;
+  border-color: #0097A7;
+}
 
 
 
